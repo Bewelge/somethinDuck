@@ -192,7 +192,7 @@ function start() {
         bgAudio.play();
     }
 
-    gameOver("123");
+    //gameOver("123");
     tick();
 
 }
