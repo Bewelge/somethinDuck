@@ -957,8 +957,8 @@ function drawSnakes() {
         if (drawHitBoxes) {
             ctxBG.fillStyle = "rgba(255,155,155,0.6)";
             ctxBG.beginPath();
-            ctxBG.moveTo(snakes[key].x - Math.cos(snakes[key].dir) * 0, snakes[key].y - Math.sin(snakes[key].dir) * 0);
-            ctxBG.arc(snakes[key].x - Math.cos(snakes[key].dir) * 0, snakes[key].y - Math.sin(snakes[key].dir) * 0, 14, 0, Math.PI * 2, 0);
+            ctxBG.moveTo(snakes[key].x - Math.cos(snakes[key].dir) * 8, snakes[key].y - Math.sin(snakes[key].dir) * 8);
+            ctxBG.arc(snakes[key].x - Math.cos(snakes[key].dir) * 8, snakes[key].y - Math.sin(snakes[key].dir) * 8, 6, 0, Math.PI * 2, 0);
             ctxBG.closePath();
             ctxBG.fill();
         }
@@ -1669,7 +1669,8 @@ function moveDucklings() {
             crocLoop:
                 for (let key in crocodiles) {
 
-                    if (Distance(ducklingOnMap[duck].x + Math.cos(ducklingOnMap[duck].dir) * 0, ducklingOnMap[duck].y + Math.sin(ducklingOnMap[duck].dir) * 0, crocodiles[key].x - Math.cos(crocodiles[key].dir) * 14, crocodiles[key].y - Math.sin(crocodiles[key].dir) * 14) < 32) {
+                    if (Distance(ducklingOnMap[duck].x + Math.cos(ducklingOnMap[duck].dir) * 0, ducklingOnMap[duck].y + Math.sin(ducklingOnMap[duck].dir) * 0, crocodiles[key].x - Math.cos(crocodiles[key].dir) * 14, crocodiles[key].y - Math.sin(crocodiles[key].dir) * 14) < 32 && 
+                        !crocodiles[key].dead) {
                         ducklingOnMap.splice(duck, 1);
 
                         bloodSplatter(crocodiles[key].x - Math.cos(crocodiles[key].dir) * 14, crocodiles[key].y - Math.sin(crocodiles[key].dir) * 14, crocodiles[key].dir + Math.PI * 0.5, (0.6 + (0.8 * Math.random())) * 5, 1, (0.6 + (0.8 * Math.random())) * 10, Math.ceil(Math.random() * 10), Math.PI * 0.5);
@@ -1687,7 +1688,7 @@ function moveDucklings() {
                 }
             for (let key in snakes) {
 
-                if (snakes[key].eaten[0] < 1 && Distance(ducklingOnMap[duck].x + Math.cos(ducklingOnMap[duck].dir) * 0, ducklingOnMap[duck].y + Math.sin(ducklingOnMap[duck].dir) * 0, snakes[key].x - Math.cos(snakes[key].dir) * 0, snakes[key].y - Math.sin(snakes[key].dir) * 0) < 30) {
+                if (snakes[key].eaten[0] < 1 && Distance(ducklingOnMap[duck].x + Math.cos(ducklingOnMap[duck].dir) * 0, ducklingOnMap[duck].y + Math.sin(ducklingOnMap[duck].dir) * 0, snakes[key].x - Math.cos(snakes[key].dir) * 8, snakes[key].y - Math.sin(snakes[key].dir) * 8) < 24) {
                     ducklingOnMap.splice(duck, 1);
 
                     bloodSplatter(snakes[key].x - Math.cos(snakes[key].dir) * 14, snakes[key].y - Math.sin(snakes[key].dir) * 14, snakes[key].dir + Math.PI * 0.5, (0.6 + (0.8 * Math.random())) * 5, 1, (0.6 + (0.8 * Math.random())) * 10, Math.ceil(Math.random() * 10), Math.PI * 0.5);
@@ -1779,7 +1780,7 @@ function moveDucklings() {
                 snakeLoop:
                     for (let croc in snakes) {
 
-                        if (snakes[croc].eaten[0] < 1 && Distance(ducklings[key].x, ducklings[key].y, snakes[croc].x - Math.cos(snakes[croc].dir) * 0, snakes[croc].y - Math.sin(snakes[croc].dir) * 0) < 14 + growthMult) {
+                        if (snakes[croc].eaten[0] < 1 && snakes[croc].eaten[1] < 1 && Distance(ducklings[key].x, ducklings[key].y, snakes[croc].x - Math.cos(snakes[croc].dir) * 8, snakes[croc].y - Math.sin(snakes[croc].dir) * 8) < 6 + growthMult) {
                             /*totalEaten++;
                             snakeEaten++;*/
                             snakes[croc].eaten[0] = Math.min(20, snakes[croc].eaten[0] + 10);
@@ -2165,7 +2166,7 @@ function movePlayer() {
 
     for (let key = snakes.length - 1; key >= 0; key--) {
 
-        if (snakes[key].eaten[0] < 1 && Distance(player.x, player.y, snakes[key].x - Math.cos(snakes[key].dir) * 0, snakes[key].y - Math.sin(snakes[key].dir) * 0) < 30) {
+        if (snakes[key].eaten[0] < 1 && Distance(player.x, player.y, snakes[key].x - Math.cos(snakes[key].dir) * 8, snakes[key].y - Math.sin(snakes[key].dir) * 8) < 24) {
 
             bloodSplatter(snakes[key].x - Math.cos(snakes[key].dir) * 0, snakes[key].y - Math.sin(snakes[key].dir) * 0, snakes[key].dir + Math.PI * 0.5, (0.6 + (0.8 * Math.random())) * 5, 1, (0.6 + (0.8 * Math.random())) * 10, Math.ceil(Math.random() * 10), Math.PI * 0.5);
             //
