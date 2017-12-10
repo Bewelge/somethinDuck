@@ -137,6 +137,7 @@ body {
     opacity:0.5;
 }
 .dialog {
+  overflow:auto;
   background-color:rgba(0,0,150,1);
   background-color:rgba(150,200,255,1);
   border: 2px solid rgba(50,100,155,0.5);

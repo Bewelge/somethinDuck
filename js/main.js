@@ -138,7 +138,7 @@ function start() {
         highscore = window.localStorage.getItem("highScore");
     }
     if (!window.localStorage.getItem("playedBefore")) {
-        $("#firstTime").css("display", "block");
+        //$("#firstTime").css("display", "block");
         try {
 
             window.localStorage.setItem("playedBefore", true);
@@ -162,8 +162,11 @@ function start() {
         //crocodiles.push(new crocodile(width+256,height/2, 0));
     },1);
     window.setTimeout(function() {
-        snakes.push(new snake(width/2, height + 64, 0.5*Math.PI));
-    },2900);
+        if (dead) {
+            snakes.push(new snake(width/2, height + 64, 0.5*Math.PI));
+            
+        }
+    },2600);
     console.log(qrtSize);
 
 
@@ -1429,8 +1432,8 @@ function moveSnakes() {
     for (let key = snakes.length - 1; key >= 0; key--) {
         // turnTowards(snakes[key], player, 0.002);
 
-        snakes[key].x -= snakes[key].speed * 1.3 * Math.cos(snakes[key].dir);
-        snakes[key].y -= snakes[key].speed * 1.3 * Math.sin(snakes[key].dir);
+        snakes[key].x -= snakes[key].speed * 1.3 / (0.01*snakes[key].animation+1) * Math.cos(snakes[key].dir);
+        snakes[key].y -= snakes[key].speed * 1.3 / (0.01*snakes[key].animation+1) * Math.sin(snakes[key].dir);
         if (snakes[key].x > width + 256) {
             snakes.splice(key, 1);
         } else if (snakes[key].x < -256) {
